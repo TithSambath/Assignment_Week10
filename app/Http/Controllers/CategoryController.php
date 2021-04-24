@@ -91,19 +91,21 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $blogs = Blog::get();
+        $categories_id = [];
         foreach ($blogs as $blog){
-            if($blog->category_id == $category->id){
-                echo "Equal";
-                return redirect()->route('categories.index')->with('fail','That category is used.');
-            }else{
-                echo "Not Equal";
-                $category->delete();
-                return redirect()->route('categories.index');
-            }
+            array_push($categories_id,$blog->category_id);
         }
-        if(empty($blog)){
+
+        if(in_array($category->id,$categories_id)){
+            return redirect()->route('categories.index')->with('fail','That category is used.');
+        }else {
             $category->delete();
             return redirect()->route('categories.index');
         }
+
+        // if(empty($blog)){
+        //     $category->delete();
+        //     return redirect()->route('categories.index');
+        // }
     }
 }
