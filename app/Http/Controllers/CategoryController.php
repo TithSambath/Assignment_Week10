@@ -102,10 +102,5 @@ class CategoryController extends Controller
             $category->delete();
             return redirect()->route('categories.index');
         }
-
-        // if(empty($blog)){
-        //     $category->delete();
-        //     return redirect()->route('categories.index');
-        // }
     }
 }

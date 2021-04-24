@@ -15,7 +15,7 @@
             <div class="form-group floating-label-form-group controls">
             <label>Category</label>
             <select class="form-control" name="category_id" required>
-                <option>Please select one</option>
+                <option value="" disabled selected>Select your category</option>
                 @foreach($categories as $category)
                     <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach         
