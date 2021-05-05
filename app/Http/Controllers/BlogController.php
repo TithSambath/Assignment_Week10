@@ -16,7 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::paginate(10); 
+        $blogs = Blog::paginate(10);
         return view('blogs.index',['blogs' => $blogs]);
 
     }
@@ -52,7 +52,6 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        
         return view('home', compact('blog'));
     }
 
@@ -64,6 +63,12 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
+
+        // authorization
+        if(Auth::user()->cannot('update',$blog)){
+            abort(403);
+        }
+
         $categories = Category::get();
         return view('blogs.edit', [
             'blog' => $blog,
@@ -80,6 +85,11 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+        // authorization
+        if($request->user()->cannot('update',$blog)){
+            abort(403);
+        }
+
         $blog->update($request->all());
         return redirect()->route('blogs.index');
     }
@@ -92,6 +102,11 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        // authorization
+        if(Auth::user()->cannot('update',$blog)){
+            abort(403);
+        }
+
         $blog->delete();
         return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully');
     }

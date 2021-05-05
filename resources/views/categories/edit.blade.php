@@ -16,7 +16,7 @@
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
               <label>Category ID</label>
-              <input class="form-control" id="categoryID" name="id" type="text" value="{{$category->id}}" placeholder="Category ID" required data-validation-required-message="Please enter category ID." />
+              <input class="form-control" id="categoryID" name="id" disabled type="text" value="{{$category->id}}" placeholder="Category ID" required data-validation-required-message="Please enter category ID." />
               <p class="help-block text-danger"></p>
           </div>
         </div>

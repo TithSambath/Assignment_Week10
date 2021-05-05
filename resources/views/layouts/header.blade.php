@@ -14,7 +14,7 @@
                 <li><a href="{{ route('categories.index') }}">Categories</a></li>
             @else
                 <li><a href="{{ url('/') }}">Home</a></li>
-            @endauth              
+            @endauth
         </ul>
     </nav><!-- .nav-menu -->
 
@@ -24,7 +24,7 @@
             {{-- <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a> --}}
             <div class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }}
+                    {{ Auth::user()->role .': '. Auth::user()->name  }}
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
