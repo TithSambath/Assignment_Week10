@@ -12,10 +12,14 @@ class Blog extends Model
     protected $table = 'blogs';
     public $timestamps = true;
 
-    protected $fillable = ['category_id','title', 'body'];
+    protected $fillable = ['category_id','user_id','title', 'body'];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

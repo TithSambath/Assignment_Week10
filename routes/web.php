@@ -24,6 +24,6 @@ Route::get('/home', function () {
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('categories', App\Http\Controllers\CategoryController::class);
-Route::resource('blogs', App\Http\Controllers\BlogController::class);
+Route::resource('categories', App\Http\Controllers\CategoryController::class)->middleware(['can:access-blogs-and-categories-page']);
+Route::resource('blogs', App\Http\Controllers\BlogController::class)->middleware(['can:access-blogs-and-categories-page']);
 

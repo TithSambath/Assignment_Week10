@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Blog;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Policies\BlogPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Blog::class => BlogPolicy::class
     ];
 
     /**
@@ -26,5 +31,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
+        Gate::define('access-blogs-and-categories-page',function(){
+            return !Auth::guest();
+        });
+
+        Gate::define('crud-categories',function(User $user){
+            return $user->role === 'Admin';
+        });
     }
 }
